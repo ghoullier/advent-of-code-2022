@@ -3,7 +3,6 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 function intersection(left: Set<string>, right: Set<string>): Set<string> {
-  console.log(left, right);
   return new Set(Array.from(left).filter((value) => right.has(value)));
 }
 
