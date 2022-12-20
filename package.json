@@ -1,0 +1,18 @@
+{
+  "name": "advent-of-code-2022",
+  "version": "1.0.0",
+  "description": "Advent of code 2022",
+  "scripts": {
+    "ts": "node --require esbuild-register"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "18",
+    "esbuild": "^0.16.10",
+    "esbuild-register": "^3.4.2",
+    "prettier": "^2.8.1",
+    "typescript": "^4.9.4"
+  }
+}
