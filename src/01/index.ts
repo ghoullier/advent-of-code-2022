@@ -1,13 +1,7 @@
-import { EOL } from "node:os";
-import { readFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { run } from "../shared/run";
 
-export async function main(): Promise<number> {
-  const input = await readFile(resolve(__dirname, "input.txt"), {
-    encoding: "utf-8",
-  });
-  const lines = input.split(EOL);
-  const elves = lines.reduce(
+run(import.meta.url, (rows) => {
+  const elves = rows.reduce(
     (acc, calory) => {
       const currentCalories = acc.calories.get(acc.currentIndex) ?? 0;
       if (calory === "") {
@@ -28,6 +22,4 @@ export async function main(): Promise<number> {
   );
 
   return elves.mostValue;
-}
-
-main().then(console.log);
+});

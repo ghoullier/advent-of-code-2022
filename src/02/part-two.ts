@@ -1,6 +1,4 @@
-import { EOL } from "node:os";
-import { readFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { run } from "../shared/run";
 
 const POINTS_PER_MOVE = {
   // Rock
@@ -34,12 +32,8 @@ const POINTS_PER_FIGHT = {
 
 type Fight = keyof typeof POINTS_PER_FIGHT;
 
-export async function main(): Promise<number> {
-  const input = await readFile(resolve(__dirname, "input.txt"), {
-    encoding: "utf-8",
-  });
-  const games = input
-    .split(EOL)
+run(import.meta.url, (rows) => {
+  const games = rows
     .filter((game): game is Fight => game in POINTS_PER_FIGHT);
 
   const scores = games.map((game) => POINTS_PER_FIGHT[game]);
@@ -53,6 +47,4 @@ export async function main(): Promise<number> {
   );
 
   return total[1];
-}
-
-main().then(console.log);
+})

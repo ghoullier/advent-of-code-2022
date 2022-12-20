@@ -1,6 +1,4 @@
-import { EOL } from "node:os";
-import { readFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { run } from "../shared/run";
 
 function intersection(left: Set<string>, right: Set<string>): Set<string> {
   return new Set(Array.from(left).filter((value) => right.has(value)));
@@ -9,12 +7,8 @@ function intersection(left: Set<string>, right: Set<string>): Set<string> {
 const PRIORITIES =
   "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-export async function main(): Promise<number> {
-  const input = await readFile(resolve(__dirname, "input.txt"), {
-    encoding: "utf-8",
-  });
-  const rucksacks = input
-    .split(EOL)
+run(import.meta.url, (rows) => {
+  const rucksacks = rows
     .map((rucksack) =>
       intersection(
         new Set(rucksack.slice(0, rucksack.length / 2).split("")),
@@ -28,6 +22,4 @@ export async function main(): Promise<number> {
   const sum = priorities.reduce(($, priority) => $ + priority, 0);
 
   return sum;
-}
-
-main().then(console.log);
+})
